@@ -52,15 +52,17 @@
         <el-row>
           <el-col :span="7">
             <i class="el-icon-view" />
-            <span class="sum-type-num">浏览100</span>
+            <span class="sum-type-num">浏览{{ viewNum }}</span>
           </el-col>
           <el-col :span="7">
-            <svg-icon icon-class="support" />
-            <span class="sum-type-num">点赞20</span>
+            <a class="my-card" :style="{ color: visitedColor }" @click="support">
+              <svg-icon icon-class="support" />
+              <span class="sum-type-num">点赞{{ supportNum }}</span>
+            </a>
           </el-col>
           <el-col :span="7">
             <svg-icon icon-class="remark" />
-            <span class="sum-type-num">评论10</span>
+            <span class="sum-type-num">评论{{ remarkNum }}</span>
           </el-col>
         </el-row>
       </div>
@@ -87,12 +89,12 @@
             />
           </el-col>
           <el-col :span="4" style="text-align: right;margin-top: 39px">
-            <el-button type="info">留言</el-button>
+            <el-button type="info" @click="save">留言</el-button>
           </el-col>
         </el-row>
       </div>
       <!--读评论-->
-      <div v-for="data in datas" :key="data.userName" style="margin-top: 30px;text-align: left">
+      <div v-for="(data, index) in datas" :key="index" style="margin-top: 30px;text-align: left">
         <el-row>
           <svg-icon icon-class="boy" style="font-size: 48px" />
           <span style="margin-left: 10px;font-weight: bold">{{ data.userName }}</span>
@@ -102,34 +104,116 @@
           <span style="margin-left: 58px;">{{ data.content }}</span>
         </el-row>
       </div>
+      <div style="margin-top: 10px">
+        <el-pagination
+          background
+          layout="prev, pager, next"
+          :total="remarkNum"
+          @current-change="currentChange"
+          @prev-click="currentChange"
+          @next-click="currentChange"
+        />
+      </div>
     </div>
   </div>
 </template>
 <script>
+import { queryPage, save, supportSave, supportQueryCount, viewQueryCount } from '@/api/boke'
+
+const title = 'Boke'
 export default {
   name: 'Boke',
   data() {
     return {
+      viewNum: 0, // 浏览数量
+      remarkNum: 0, // 评论数量
+      supportNum: 0, // 点赞数量
       userName: '', // 写评论昵称
       content: '', // 写留言内容
-      datas: [{ // 读评论数据
-        userName: '奔跑的小马', // 评论昵称
-        date: '2021-1-14 17:30:20', // 评论日期
-        content: '大佬写的不错，能否带带我！嘿嘿' // 评论内容
-      },
-      {
-        userName: '小飞', // 评论昵称
-        date: '2021-1-14 17:30:20', // 评论日期
-        content: '样子还可以更完美，可以参考翁天信博客' // 评论内容
-      }]
+      datas: [], // 查询的留言数据
+      current: 1, // 当前页
+      visitedColor: this.getCookie('support') ? '#4A9FF9' : '' // 点赞动态颜色
     }
   },
   mounted() {
-
+    this.queryPage()
+    this.supportQueryCount()
+    this.viewQueryCount()
   },
   methods: {
+    // 跳转链接
     herf(url) {
       location.href = url
+    },
+    // 浏览数量
+    async viewQueryCount() {
+      debugger
+      const query = [{
+        column: 'request_url',
+        expression: 'eq',
+        val: '/dcims/boke/message/queryPage'
+      }]
+      const res = await viewQueryCount(JSON.stringify(query))
+      this.viewNum = res.data
+    },
+    // 点赞
+    async support() {
+      if (!this.getCookie('support')) { // 点赞过的,记录cookie,不允许再点击
+        const data = {
+          page: title,
+          date: new Date()
+        }
+        supportSave(data)
+        this.supportNum += 1
+        document.cookie = 'support=1'
+      }
+    },
+    getCookie(cname) {
+      var name = cname + '='
+      var ca = document.cookie.split(';')
+      for (var i = 0; i < ca.length; i++) {
+        var c = ca[i].trim()
+        if (c.indexOf(name) === 0) return c.substring(name.length, c.length)
+      }
+      return ''
+    },
+    async supportQueryCount() {
+      const query = [{
+        column: 'page',
+        expression: 'eq',
+        val: title
+      }]
+      const res = await supportQueryCount(JSON.stringify(query))
+      this.supportNum = res.data
+    },
+    // 查询留言
+    async queryPage() {
+      const data = {
+        'size': 10,
+        'current': this.current,
+        'orders': [{ 'column': 'date', 'asc': false }]
+      }
+      const res = await queryPage(data)
+      this.datas = res.data.records
+      this.remarkNum = res.data.total
+    },
+    // 保存留言
+    async save() {
+      const data = {
+        userName: this.userName || '匿名',
+        content: this.content,
+        date: new Date()
+      }
+      await save(data)
+      this.queryPage()
+      // 清空留言
+      this.userName = ''
+      this.content = ''
+    },
+    // 当前页改变
+    currentChange(el) {
+      this.current = el
+      this.queryPage()
     }
   }
 }
@@ -151,6 +235,10 @@ export default {
   .des{
     text-align: left;
     margin-bottom: 60px;
+  }
+  .my-card:hover{
+    color: #4A9FF9;
+    cursor:pointer;
   }
   .card{
     height: 250px;

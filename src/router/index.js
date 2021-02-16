@@ -47,6 +47,11 @@ export const constantRoutes = [
     ]
   },
   {
+    path: '/boke',
+    component: () => import('@/views/boke/index'),
+    hidden: true
+  },
+  {
     path: '/login',
     component: () => import('@/views/login/index'),
     hidden: true
@@ -64,11 +69,6 @@ export const constantRoutes = [
   {
     path: '/401',
     component: () => import('@/views/error-page/401'),
-    hidden: true
-  },
-  {
-    path: '/boke',
-    component: () => import('@/views/boke/index'),
     hidden: true
   },
   {
