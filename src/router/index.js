@@ -178,6 +178,18 @@ export const asyncRoutes = [
         component: () => import('@/views/excel/upload-excel'),
         name: 'UploadExcel',
         meta: { title: 'Upload Excel' }
+      },
+      {
+        path: '天石-模板数据',
+        component: () => import('@/views/excel/tsyw'),
+        name: 'ts-mbsj',
+        meta: { title: '天石-模板数据' }
+      },
+      {
+        path: '天石-报价表',
+        component: () => import('@/views/excel/tsyw-offer'),
+        name: 'ts-bjb',
+        meta: { title: '天石-报价表' }
       }
     ]
   },
