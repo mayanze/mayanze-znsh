@@ -99,7 +99,9 @@ export default {
           if (xhr.status === 200) {
             location.href = process.env.VUE_APP_BASE_API1 + '/tsyw_offter_downd'
           } else {
-            alert('发生未知错误请联系管理员，错误内容：' + xhr.response)
+            const index = JSON.parse(xhr.response).trace.indexOf('Caused by:')
+            const message = JSON.parse(xhr.response).message + '\n' + JSON.parse(xhr.response).trace.substring(index)
+            alert(message)
           }
           $this.init()
         }

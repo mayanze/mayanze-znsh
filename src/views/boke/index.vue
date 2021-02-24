@@ -29,18 +29,18 @@
             <div class="el-card__body">
               <img src="@/assets/boke_images/github.png" class="image">
               <div style="padding: 14px 0px;">
-                <span>记录了一些自己关于技术的记录和心得，有兴趣的可以看看
+                <span>技术源码都在这里哦，有兴趣的可以来看看，希望对你有所帮助
                 </span>
               </div>
             </div>
           </div>
         </el-col>
         <el-col :span="6" class="card">
-          <div class="el-card is-hover-shadow" @click="herf('http://mayanze.com/zhsh')">
+          <div class="el-card is-hover-shadow" @click="herf('http://mayanze.com/#/dashboard/dashboard')">
             <div class="el-card__body">
               <img src="@/assets/boke_images/web.png" class="image">
               <div style="padding: 14px 0px;">
-                <span>记录了一些自己关于技术的记录和心得，有兴趣的可以看看
+                <span>这是我写的粗陋网站，有兴趣的可以来看看，欢迎提出你宝贵的建议
                 </span>
               </div>
             </div>
