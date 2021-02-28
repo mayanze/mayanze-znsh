@@ -57,7 +57,6 @@ export default {
     dataHandleRemove(file, fileList) {
       this.dataFileSize--
     },
-
     /**
      * 上传到服务器
      */
@@ -99,8 +98,7 @@ export default {
           if (xhr.status === 200) {
             location.href = process.env.VUE_APP_BASE_API1 + '/tsyw_offter_downd'
           } else {
-            const index = JSON.parse(xhr.response).trace.indexOf('Caused by:')
-            const message = JSON.parse(xhr.response).message + '\n' + JSON.parse(xhr.response).trace.substring(index)
+            const message = JSON.parse(xhr.response).message
             alert(message)
           }
           $this.init()
