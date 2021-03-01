@@ -95,6 +95,7 @@ export default {
         xhr.onload = function() {
           $this.loading.close()
           $this.$refs.dataUpload.clearFiles()
+          debugger
           if (xhr.status === 200) {
             location.href = process.env.VUE_APP_BASE_API1 + '/tsyw_offter_downd'
           } else {
