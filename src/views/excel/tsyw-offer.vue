@@ -89,7 +89,7 @@ export default {
         // XMLHttpRequest 对象
         var xhr = new XMLHttpRequest()
         xhr.open('post', FileController, true)
-        xhr.timeout = 10000 // 超时时间，单位是毫秒
+        xhr.timeout = 30000 // 超时时间，单位是毫秒
 
         // 请求完成。在此进行处理。
         xhr.onload = function() {
