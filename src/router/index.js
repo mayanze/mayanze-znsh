@@ -196,6 +196,23 @@ export const asyncRoutes = [
       }
     ]
   },
+  {
+    path: '/system',
+    component: Layout,
+    name: 'System',
+    meta: {
+      title: '系统管理',
+      icon: 'excel'
+    },
+    children: [
+      {
+        path: '请求日志',
+        component: () => import('@/views/system/request-log'),
+        name: 'request-log',
+        meta: { title: '请求日志' }
+      }
+    ]
+  },
 
   // 404 page must be placed at the end !!!
   { path: '*', redirect: '/404', hidden: true }
