@@ -16,7 +16,7 @@
       highlight-current-row
       style="width: 100%;"
     >
-      <el-table-column label="序号" type="index" prop="id" sortable="custom" align="center" width="50" />
+      <el-table-column label="序号" type="index" :index="indexMethod" prop="id" sortable="custom" align="center" width="50" />
       <el-table-column label="请求路径" width="280px">
         <template slot-scope="{row}">
           <span>{{ row.requestUrl }}</span>
@@ -32,12 +32,7 @@
           <span>{{ row.requestParmater }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="请求IP" width="120px">
-        <template slot-scope="{row}">
-          <span>{{ row.requestIp }}</span>
-        </template>
-      </el-table-column>
-      <el-table-column label="效应内容" align="center" width="300">
+      <el-table-column label="效应内容" align="center" width="400">
         <template slot-scope="{row}">
           <span>{{ row.responseMsg }}</span>
         </template>
@@ -108,6 +103,7 @@ export default {
       }]
       this.listQuery['condition'] = condition
       queryPage(this.listQuery).then(response => {
+        debugger
         this.listLoading = false
         this.list = response.data.records
         this.total = response.data.total
@@ -116,6 +112,10 @@ export default {
     handleFilter() {
       this.listQuery.current = 1
       this.getList()
+    },
+    // index默认从0开始，所以加了1
+    indexMethod(index) {
+      return (index + 1) + ((this.listQuery.current - 1) * this.listQuery.size)
     }
   }
 }
