@@ -159,30 +159,6 @@ export const asyncRoutes = [
     },
     children: [
       {
-        path: 'export-excel',
-        component: () => import('@/views/excel/export-excel'),
-        name: 'ExportExcel',
-        meta: { title: 'Export Excel' }
-      },
-      {
-        path: 'export-selected-excel',
-        component: () => import('@/views/excel/select-excel'),
-        name: 'SelectExcel',
-        meta: { title: 'Export Selected' }
-      },
-      {
-        path: 'export-merge-header',
-        component: () => import('@/views/excel/merge-header'),
-        name: 'MergeHeader',
-        meta: { title: 'Merge Header' }
-      },
-      {
-        path: 'upload-excel',
-        component: () => import('@/views/excel/upload-excel'),
-        name: 'UploadExcel',
-        meta: { title: 'Upload Excel' }
-      },
-      {
         path: '天石-模板数据',
         component: () => import('@/views/excel/tsyw'),
         name: 'ts-mbsj',
@@ -206,10 +182,16 @@ export const asyncRoutes = [
     },
     children: [
       {
-        path: '请求日志',
+        path: 'request-log',
         component: () => import('@/views/system/request-log'),
         name: 'request-log',
         meta: { title: '请求日志' }
+      },
+      {
+        path: 'user',
+        component: () => import('@/views/system/user'),
+        name: 'user',
+        meta: { title: '用户管理' }
       }
     ]
   },
