@@ -73,11 +73,47 @@
     </el-table>
 
     <pagination v-show="total>0" :total="total" :page.sync="listQuery.current" :limit.sync="listQuery.size" @pagination="getList" />
-
+    <!--{
+  "records": [
+    {
+      "id": "1",
+      "name": "马艳泽",
+      "sex": 1,
+      "roleId": "1",
+      "orgId": "1",
+      "phone": "13152130059",
+      "email": "1229509678@qq.com",
+      "status": 1,
+      "createTime": "2021-03-18 15:21:04",
+      "remarks": null
+    }
+  ],
+}-->
     <el-dialog :title="textMap[dialogStatus]" :visible.sync="dialogFormVisible">
       <el-form ref="dataForm" :rules="rules" :model="user" label-position="left" label-width="70px" style="width: 400px; margin-left:50px;">
-        <el-form-item label="Remark">
-          <el-input v-model="user.remarks" :autosize="{ minRows: 2, maxRows: 4}" type="textarea" placeholder="Please input" />
+        <el-form-item label="用户名称">
+          <el-input v-model="user.name" type="text" placeholder="请输入内容" />
+        </el-form-item>
+        <el-form-item label="性别">
+          <el-input v-model="user.sex" type="text" placeholder="请选择内容" />
+        </el-form-item>
+        <el-form-item label="角色">
+          <el-input v-model="user.roleName" type="text" placeholder="请选择内容" />
+        </el-form-item>
+        <el-form-item label="组织">
+          <el-input v-model="user.orgName" type="text" placeholder="请选择内容" />
+        </el-form-item>
+        <el-form-item label="电话">
+          <el-input v-model="user.phone" type="text" placeholder="请输入内容" />
+        </el-form-item>
+        <el-form-item label="邮箱">
+          <el-input v-model="user.email" type="text" placeholder="请输入内容" />
+        </el-form-item>
+        <el-form-item label="状态">
+          <el-input v-model="user.status" type="text" placeholder="请选择内容" />
+        </el-form-item>
+        <el-form-item label="备注">
+          <el-input v-model="user.remarks" :autosize="{ minRows: 2, maxRows: 4}" type="textarea" placeholder="输入内容" />
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -124,11 +160,19 @@ export default {
       },
       dialogStatus: '',
       textMap: {
-        update: 'Edit',
-        create: 'Create'
+        update: '编辑',
+        create: '新增'
       },
       dialogFormVisible: false,
       user: {
+        id: '',
+        name: '',
+        sex: '',
+        roleId: '',
+        orgId: '',
+        phone: '',
+        email: '',
+        status: '',
         remarks: ''
       }
     }
@@ -158,6 +202,9 @@ export default {
     // index默认从0开始，所以加了1
     indexMethod(index) {
       return (index + 1) + ((this.listQuery.current - 1) * this.listQuery.size)
+    },
+    resetTemp() {
+
     },
     handleCreate() {
       this.resetTemp()
