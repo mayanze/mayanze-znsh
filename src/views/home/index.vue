@@ -3,7 +3,7 @@
   <div>
     <div class="body">
       <el-row class="head">
-        <span>马艳泽的博客</span>
+        <span>马艳泽的首页</span>
       </el-row>
       <el-row>
         <el-col :span="10" class="des">
@@ -40,7 +40,7 @@
             <div class="el-card__body">
               <img src="@/assets/boke_images/web.png" class="image">
               <div style="padding: 14px 0px;">
-                <span>这是我写的粗陋网站，有兴趣的可以来看看，欢迎提出你宝贵的建议
+                <span>这是我写的粗陋网站，有兴趣的可以来看看
                 </span>
               </div>
             </div>
@@ -48,73 +48,76 @@
         </el-col>
       </el-row>
       <!--统计区-->
-      <div class="sum">
-        <el-row>
-          <el-col :span="7">
-            <i class="el-icon-view" />
-            <span class="sum-type-num">浏览{{ viewNum }}</span>
-          </el-col>
-          <el-col :span="7">
-            <a class="my-card" :style="{ color: visitedColor }" @click="support">
-              <svg-icon icon-class="support" />
-              <span class="sum-type-num">点赞{{ supportNum }}</span>
-            </a>
-          </el-col>
-          <el-col :span="7">
-            <svg-icon icon-class="remark" />
-            <span class="sum-type-num">评论{{ remarkNum }}</span>
-          </el-col>
-        </el-row>
-      </div>
+      <!--      <div class="sum">-->
+      <!--        <el-row>-->
+      <!--          <el-col :span="7">-->
+      <!--            <i class="el-icon-view" />-->
+      <!--            <span class="sum-type-num">浏览{{ viewNum }}</span>-->
+      <!--          </el-col>-->
+      <!--          <el-col :span="7">-->
+      <!--            <a class="my-card" :style="{ color: visitedColor }" @click="support">-->
+      <!--              <svg-icon icon-class="support" />-->
+      <!--              <span class="sum-type-num">点赞{{ supportNum }}</span>-->
+      <!--            </a>-->
+      <!--          </el-col>-->
+      <!--          <el-col :span="7">-->
+      <!--            <svg-icon icon-class="remark" />-->
+      <!--            <span class="sum-type-num">评论{{ remarkNum }}</span>-->
+      <!--          </el-col>-->
+      <!--        </el-row>-->
+      <!--      </div>-->
       <!--写评论-->
-      <div style="margin-top: 30px;text-align: left">
-        <el-row>
-          <el-col :span="2">
-            <svg-icon icon-class="head" style="font-size: 48px" />
-          </el-col>
-          <el-col :span="6">
-            <el-input v-model="userName" placeholder="输入你的昵称" maxlength="10" style="margin-left: 10px; line-height: 48px;" />
-          </el-col>
-        </el-row>
-        <el-row style="margin-top: 10px">
-          <el-col :span="20">
-            <el-input
-              v-model="content"
-              type="textarea"
-              :rows="3"
-              resize="none"
-              placeholder="给出你的建议"
-              maxlength="255"
-              style="height: 75px"
-            />
-          </el-col>
-          <el-col :span="4" style="text-align: right;margin-top: 39px">
-            <el-button type="info" @click="save">留言</el-button>
-          </el-col>
-        </el-row>
-      </div>
+      <!--      <div style="margin-top: 30px;text-align: left">-->
+      <!--        <el-row>-->
+      <!--          <el-col :span="2">-->
+      <!--            <svg-icon icon-class="head" style="font-size: 48px" />-->
+      <!--          </el-col>-->
+      <!--          <el-col :span="6">-->
+      <!--            <el-input v-model="userName" placeholder="输入你的昵称" maxlength="10" style="margin-left: 10px; line-height: 48px;" />-->
+      <!--          </el-col>-->
+      <!--        </el-row>-->
+      <!--        <el-row style="margin-top: 10px">-->
+      <!--          <el-col :span="20">-->
+      <!--            <el-input-->
+      <!--              v-model="content"-->
+      <!--              type="textarea"-->
+      <!--              :rows="3"-->
+      <!--              resize="none"-->
+      <!--              placeholder="给出你的建议"-->
+      <!--              maxlength="255"-->
+      <!--              style="height: 75px"-->
+      <!--            />-->
+      <!--          </el-col>-->
+      <!--          <el-col :span="4" style="text-align: right;margin-top: 39px">-->
+      <!--            <el-button type="info" @click="save">留言</el-button>-->
+      <!--          </el-col>-->
+      <!--        </el-row>-->
+      <!--      </div>-->
       <!--读评论-->
-      <div v-for="(data, index) in datas" :key="index" style="margin-top: 30px;text-align: left">
-        <el-row>
-          <svg-icon icon-class="boy" style="font-size: 48px" />
-          <span style="margin-left: 10px;font-weight: bold">{{ data.userName }}</span>
-          <span style="margin-left: 10px;color: #999999;">{{ data.date }}</span>
-        </el-row>
-        <el-row style="margin-top: 10px">
-          <span style="margin-left: 58px;">{{ data.content }}</span>
-        </el-row>
-      </div>
-      <div style="margin-top: 10px">
-        <el-pagination
-          background
-          layout="prev, pager, next"
-          :total="remarkNum"
-          @current-change="currentChange"
-          @prev-click="currentChange"
-          @next-click="currentChange"
-        />
-      </div>
+      <!--      <div v-for="(data, index) in datas" :key="index" style="margin-top: 30px;text-align: left">-->
+      <!--        <el-row>-->
+      <!--          <svg-icon icon-class="boy" style="font-size: 48px" />-->
+      <!--          <span style="margin-left: 10px;font-weight: bold">{{ data.userName }}</span>-->
+      <!--          <span style="margin-left: 10px;color: #999999;">{{ data.date }}</span>-->
+      <!--        </el-row>-->
+      <!--        <el-row style="margin-top: 10px">-->
+      <!--          <span style="margin-left: 58px;">{{ data.content }}</span>-->
+      <!--        </el-row>-->
+      <!--      </div>-->
+      <!--      <div style="margin-top: 10px">-->
+      <!--        <el-pagination-->
+      <!--          background-->
+      <!--          layout="prev, pager, next"-->
+      <!--          :total="remarkNum"-->
+      <!--          @current-change="currentChange"-->
+      <!--          @prev-click="currentChange"-->
+      <!--          @next-click="currentChange"-->
+      <!--        />-->
+      <!--      </div>-->
     </div>
+    <footer style="position: absolute;bottom: 10px;left: 45%;">
+      <a href="https://beian.miit.gov.cn/">陕ICP备20000690号-1</a>
+    </footer>
   </div>
 </template>
 <script>

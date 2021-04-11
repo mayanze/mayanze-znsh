@@ -47,8 +47,8 @@ export const constantRoutes = [
     ]
   },
   {
-    path: '/boke',
-    component: () => import('@/views/boke/index'),
+    path: '/home',
+    component: () => import('@/views/home/index'),
     hidden: true
   },
   {
@@ -73,8 +73,8 @@ export const constantRoutes = [
   },
   {
     path: '/',
-    redirect: '/boke',
-    component: () => import('@/views/boke/index')
+    redirect: '/home',
+    component: () => import('@/views/home/index')
   }
 ]
 
@@ -192,6 +192,23 @@ export const asyncRoutes = [
         component: () => import('@/views/system/user'),
         name: 'user',
         meta: { title: '用户管理' }
+      }
+    ]
+  },
+  {
+    path: '/house',
+    component: Layout,
+    name: 'System',
+    meta: {
+      title: '房屋管理',
+      icon: 'excel'
+    },
+    children: [
+      {
+        path: 'index',
+        component: () => import('@/views/house/index'),
+        name: 'index',
+        meta: { title: '房屋管理' }
       }
     ]
   },
